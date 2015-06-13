@@ -1,0 +1,3 @@
+'wop wop'
+wop = =>
+	'dop'

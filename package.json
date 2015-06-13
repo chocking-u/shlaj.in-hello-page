@@ -1,0 +1,33 @@
+{
+  "name": "shlajin-landing",
+  "version": "1.0.0",
+  "description": "My home website landing",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Nothing to test!\" && exit 1"
+  },
+  "author": "Artem Shlagin",
+  "license": "ISC",
+  "devDependencies": {
+    "coffee-script": "^1.9.3",
+    "connect": "^3.3.5",
+    "connect-livereload": "^0.5.3",
+    "gulp": "^3.9.0",
+    "gulp-coffee": "^2.3.1",
+    "gulp-concat": "^2.5.2",
+    "gulp-concat-vendor": "0.0.4",
+    "gulp-csso": "^1.0.0",
+    "gulp-filter": "^2.0.2",
+    "gulp-imagemin": "^2.2.1",
+    "gulp-jade": "^1.0.1",
+    "gulp-livereload": "^3.8.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-ruby-sass": "^1.0.5",
+    "gulp-scss": "^1.1.2",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.5",
+    "main-bower-files": "^2.8.0",
+    "serve-static": "^1.9.3",
+    "tiny-lr": "^0.1.5"
+  }
+}

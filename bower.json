@@ -1,0 +1,20 @@
+{
+  "name": "shlajin-landing",
+  "version": "1.0.0",
+  "authors": [
+    "Artem Shlagin <flufme@yandex.ru>"
+  ],
+  "description": "Shlajin landing page",
+  "main": "public/vendor.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "~3.3.4"
+  }
+}
