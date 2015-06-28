@@ -16,8 +16,9 @@ serveStatic = require('serve-static')
 mainBowerFiles = require('main-bower-files')
 es = require('event-stream')
 purify = require('gulp-purifycss')
-minifyCss = require('gulp-minify-css')
-
+# minifyCss = require('gulp-minify-css') # this one breaks layout a bit
+minifyCss = require('gulp-clean-css')
+gzip = require('gulp-gzip')
 
 # I switched to a custom compile version of bootstrap, so I don't need vendor bower files.
 gulp.task "vendor:js", ->
@@ -96,14 +97,18 @@ gulp.task 'css:production', ->
   gulp.src('./public/css/**/*.css')
   .pipe(concat('style.css'))
   .pipe(purify(['./public/**/*.js', './public/**/*.html']))
-  .pipe(minifyCss({compatibility: 'ie8'}))
-  .pipe(gulp.dest('./production/css'));
+  .pipe(minifyCss())
+  .pipe(gulp.dest('./production/css'))
+  .pipe(gzip())
+  .pipe(gulp.dest('./production/css'))
 
 gulp.task 'js:production', ->
   gulp.src('./public/js/**/*.js')
   .on('error', console.log)
   .pipe(concat('index.js'))
   .pipe(uglify())
+  .pipe(gulp.dest('./production/js'))
+  .pipe(gzip())
   .pipe(gulp.dest('./production/js'))
 
 gulp.task 'images:production', ->
@@ -115,9 +120,18 @@ gulp.task 'fonts:production', ->
   gulp.src('./public/fonts/**/*', base: './public/fonts')
   .on('error', console.log)
   .pipe(gulp.dest('production/fonts'))
+  .pipe(gzip())
+  .pipe(gulp.dest('production/fonts'))
+
+gulp.task 'html:production', ->
+  gulp.src('./public/*.html')
+  .on('error', console.log)
+  .pipe(gulp.dest('./production/'))
+  .pipe(gzip())
+  .pipe(gulp.dest('./production/'))
 
 gulp.task 'compile:production', ['compile:development'], ->
-  gulp.start ['css:production', 'js:production', 'images:production', 'fonts:production']
+  gulp.start ['css:production', 'js:production', 'images:production', 'fonts:production', 'html:production']
 
 gulp.task 'compile:development', ['fonts', 'images', 'jade', 'js', 'scss']
 
