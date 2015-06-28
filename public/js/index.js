@@ -1,3 +1,11 @@
+(function() {
+  document.getElementById('expand-stack-list').onclick = function() {
+    document.getElementById('stack-list').classList.toggle('expanded');
+    return false;
+  };
+
+}).call(this);
+
 window.smoothScroll = (function(){
 // We do not want this script to be applied in browsers that do not support those
 // That means no smoothscroll on IE9 and below.
@@ -82,10 +90,3 @@ document.addEventListener("DOMContentLoaded", function () {
 return smoothScroll;
 
 })();
-(function() {
-  document.getElementById('expand-stack-list').onclick = function() {
-    document.getElementById('stack-list').classList.toggle('expanded');
-    return false;
-  };
-
-}).call(this);

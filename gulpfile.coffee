@@ -13,10 +13,13 @@ coffee = require('gulp-coffee')
 filter = require('gulp-filter')
 scss = require('gulp-scss')
 serveStatic = require('serve-static')
-clean = require('gulp-clean')
 mainBowerFiles = require('main-bower-files')
 es = require('event-stream')
+purify = require('gulp-purifycss')
+minifyCss = require('gulp-minify-css')
 
+
+# I switched to a custom compile version of bootstrap, so I don't need vendor bower files.
 gulp.task "vendor:js", ->
   vendors = mainBowerFiles()
   gulp.src(vendors)
@@ -37,10 +40,17 @@ gulp.task 'vendor:fonts', ->
   .pipe(filter(['*.eot', '*.ttf', '*.woff', '*.woff2']))
   .pipe(gulp.dest('./public/fonts'));
 
+
 gulp.task 'fonts', ->
   gulp.src ['./assets/fonts/*']
   .pipe(filter(['*.eot', '*.ttf', '*.woff', '*.woff2']))
   .pipe(gulp.dest('./public/fonts'));
+
+gulp.task 'images', ->
+  gulp.src('./assets/images/**/*', base: './assets/images')
+  .on('error', console.log)
+  .pipe(gulp.dest('public/images'))
+
 
 server = lr();
 
@@ -59,30 +69,21 @@ gulp.task 'js', ->
     .pipe(coffee())
     .on('error', console.log),
     gulp.src('./assets/javascript/**/*.js')
-  ).pipe(concat('index.js')) # Собираем все JS, кроме тех которые находятся в ./assets/js/vendor/**
+  ).pipe(concat('index.js'))
   .pipe(gulp.dest('./public/js'))
-  .pipe(livereload(server)); # даем команду на перезагрузку страницы
+  .pipe(livereload(server))
 
 gulp.task 'scss', ->
-  gulp.src('./assets/css/**/*.scss')
-  .pipe(scss())
-  .on('error', console.log)
+  es.concat(
+    gulp.src('./assets/css/**/*.scss')
+    .pipe(scss())
+    .on('error', console.log),
+    gulp.src('./assets/css/**/*.css')
+  )
   .pipe(concat('style.css'))
   .pipe(gulp.dest('public/css'))
   .pipe(livereload(server))
 
-
-gulp.task 'clean', ->
-  # does not run synchroniously and blocks stream for some reason, investigate further
-  # gulp.src('./public/', read: false)
-  # .pipe(clean())
-
-gulp.task 'images', ->
-  gulp.src('./assets/images/**/*', base: './assets/images')
-  .on('error', console.log)
-  .pipe(gulp.dest('public/images'))
-
-# Локальный сервер для разработки
 gulp.task 'http-server', ->
   connect()
   .use(require('connect-livereload')())
@@ -90,14 +91,43 @@ gulp.task 'http-server', ->
   .listen '9000'
   console.log('Server listening on http://localhost:9000');
 
+gulp.task 'css:production', ->
+  # purify + compress
+  gulp.src('./public/css/**/*.css')
+  .pipe(concat('style.css'))
+  .pipe(purify(['./public/**/*.js', './public/**/*.html']))
+  .pipe(minifyCss({compatibility: 'ie8'}))
+  .pipe(gulp.dest('./production/css'));
 
-# gulp.task 'watch', ['clean', 'vendor:js', 'vendor:css', 'vendor:fonts', 'fonts', 'images', 'jade', 'coffee', 'scss', 'http-server'], ->
-gulp.task 'watch', ['clean', 'fonts', 'images', 'jade', 'js', 'scss', 'http-server'], ->
+gulp.task 'js:production', ->
+  gulp.src('./public/js/**/*.js')
+  .on('error', console.log)
+  .pipe(concat('index.js'))
+  .pipe(uglify())
+  .pipe(gulp.dest('./production/js'))
 
-  # live reload
+gulp.task 'images:production', ->
+  gulp.src('./public/images/**/*', base: './public/images')
+  .on('error', console.log)
+  .pipe(gulp.dest('production/images'))
+
+gulp.task 'fonts:production', ->
+  gulp.src('./public/fonts/**/*', base: './public/fonts')
+  .on('error', console.log)
+  .pipe(gulp.dest('production/fonts'))
+
+gulp.task 'compile:production', ['compile:development'], ->
+  gulp.start ['css:production', 'js:production', 'images:production', 'fonts:production']
+
+gulp.task 'compile:development', ['fonts', 'images', 'jade', 'js', 'scss']
+
+gulp.task 'watch', ->
+  gulp.start 'compile:development'
+  gulp.start 'http-server' # live reload
   server.listen 35729, (err) ->
     return console.log(err) if err
     gulp.watch 'assets/css/**/*.scss', ['scss']
+    gulp.watch 'assets/css/**/*.css', ['scss']
     gulp.watch 'assets/template/**/*.jade', ['jade']
     gulp.watch 'assets/javascript/**/*.coffee', ['js']
     gulp.watch 'assets/javascript/**/*.js', ['js']
