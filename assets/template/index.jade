@@ -6,209 +6,143 @@ html(lang='en')
     meta(name='viewport', content='width=device-width, initial-scale=1')
     meta(name='description', content='')
     meta(name='author', content='')
-    title Stylish Portfolio - Start Bootstrap Theme
-    link(href="/css/vendor.css", rel="stylesheet")
-    link(href="/css/index.css", rel="stylesheet")
-    // Custom Fonts
-    link(href='font-awesome/css/font-awesome.min.css', rel='stylesheet', type='text/css')
-    link(href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic', rel='stylesheet', type='text/css')
+    title Artem Shlagin – Freelancer, Developer, Entrepreneur and a nice guy
+    //- link(href="/css/vendor.css", rel="stylesheet")
+    link(href="/css/style.css", rel="stylesheet")
     // HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries
     // WARNING: Respond.js doesn't work if you view the page via file://
     //if lt IE 9
       script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')
       script(src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js')
   body
-    // Navigation
-    a#menu-toggle.btn.btn-dark.btn-lg.toggle(href='#')
-      i.fa.fa-bars
-    nav#sidebar-wrapper
-      ul.sidebar-nav
-        a#menu-close.btn.btn-light.btn-lg.pull-right.toggle(href='#')
-          i.fa.fa-times
-        li.sidebar-brand
-          a(href='#top', onclick='$("#menu-close").click();') Start Bootstrap
-        li
-          a(href='#top', onclick='$("#menu-close").click();') Home
-        li
-          a(href='#about', onclick='$("#menu-close").click();') About
-        li
-          a(href='#services', onclick='$("#menu-close").click();') Services
-        li
-          a(href='#portfolio', onclick='$("#menu-close").click();') Portfolio
-        li
-          a(href='#contact', onclick='$("#menu-close").click();') Contact
-    // Header
-    header#top.header
-      .text-vertical-center
-        h1 Start Bootstrap
-        h3 Free Bootstrap Themes & Templates
-        br
-        a.btn.btn-dark.btn-lg(href='#about') Find Out More
-    // About
-    section#about.about
-      .container
+    .header
+      header.top-line-content
+        h1 Artem Shlagin
+        span Professional Fullstack Web-Developer, Traveller and Coffee Lover.
+        //- a About me
+        //- a CV
+        //- a Blog
+      menu#main
+        a.btn.btn-dark.btn-lg(href='#about') My skills
+        a.btn.btn-dark.btn-lg(href='mailto:hey@shlaj.in') Write me a message
+
+  section#about.about
+    .container
+      .row
+        .col-lg-12.text-center
+          h2
+            | Professional <b>Ruby On Rails</b> Fullstack Developer.
+            br
+            | I can develop from <b>scratch</b> or enhance <b>existing project</b>, work solo or as a part of a team.
+            br
+            | I <b>perform</b> code review, audit and consult.
+          p.lead
+            a#expand-stack-list(href='#') Show technologies I'm experienced with
+    .container-fluid.with-paddings     
+      #stack-list
         .row
-          .col-lg-12.text-center
-            h2 Stylish Portfolio is the perfect theme for your next project!
-            p.lead
-              | This theme features some wonderful photography courtesy of 
-              a(target='_blank', href='http://join.deathtothestockphoto.com/') Death to the Stock Photo
-              | .
-        // /.row
-      // /.container
-    // Services
-    // The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/
-    section#services.services.bg-primary
+          .col-md-3.skill-name
+            h2 Languages and frameworks:
+          .col-md-9.description
+            ul
+              li Ruby, Ruby on Rails 3/4
+              li CoffeeScript/JavaScript
+              li angular
+              li Twitter Bootstrap
+              li node.js
+              li HTML5 / HAML / Jade / Slim / erb
+              li CSS/SCSS
+              li ActionScript 3 / Air
+        .row
+          .col-md-3.skill-name
+            h2 Libraries:
+          .col-md-9.description
+            | Dozens of Ruby gems and Javascript libraries (including jQuery, lodash, underscore and others)
+        .row
+          .col-md-3.skill-name
+            h2 VCS
+          .col-md-9.description
+            ul
+              li GIT
+              li SVN
+        .row
+          .col-md-3.skill-name
+            h2 TDD/BDD with
+          .col-md-9.description
+            ul
+              li RSpec
+              li Capybara
+              li jasmine
+        .row
+          .col-md-3.skill-name
+            h2 Storages
+          .col-md-9.description
+            ul
+              li Any RDBs (such as PostgreSQL, MySQL, sqlite3 and others)
+              li No-SQL DBs – redis, mongoDB, memcached
+        .row
+          .col-md-3.skill-name
+            h2 Other experience
+          .col-md-9.description
+            ul
+              li PaaS: AWS, Heroku, Nodejitsu
+              li Wowza Media Server
+              li gulp
+              li Restful APIs
+              li oAuth
+              li Background jobs
+              li And even more.
+    section#testimonials.testimonials.bg-primary
       .container
         .row.text-center
           .col-lg-10.col-lg-offset-1
-            h2 Our Services
+            h2 Testimonials
             hr.small
             .row
-              .col-md-3.col-sm-6
+              .col-md-3.col-sm-12
                 .service-item
-                  span.fa-stack.fa-4x
-                    i.fa.fa-circle.fa-stack-2x
-                    i.fa.fa-cloud.fa-stack-1x.text-primary
+                  img.img-circle.img-thumbnail.testimonial(src="/images/testimonials/john.jpg")
                   h4
-                    strong Service Name
-                  p Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  a.btn.btn-light(href='#') Learn More
-              .col-md-3.col-sm-6
+                    strong
+                      | John, San Francisco
+                      br
+                      | Freelancer
+                      br
+                  p Artem is great! His code is solid and his client relations are the best! He understands requirements quickly, asks questions upfront, and then works. Never a risk of waking up halfway around the world and seeing the wrong work completed in the morning. I definitely recommend him for your Rails project!
+              .col-md-3.col-sm-12
                 .service-item
-                  span.fa-stack.fa-4x
-                    i.fa.fa-circle.fa-stack-2x
-                    i.fa.fa-compass.fa-stack-1x.text-primary
+                  img.img-circle.img-thumbnail.testimonial(src="/images/testimonials/dmitry.jpg")
                   h4
-                    strong Service Name
-                  p Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  a.btn.btn-light(href='#') Learn More
-              .col-md-3.col-sm-6
+                    strong
+                      | Dmitry, Moscow
+                      br
+                      | Head Of Department
+                  p Professional developer and easy to interact person who understands the needs of the customer and has the ability to implement an idea exactly as needed. Has great sense of timing and deadlines.
+              .col-md-3.col-sm-12
                 .service-item
-                  span.fa-stack.fa-4x
-                    i.fa.fa-circle.fa-stack-2x
-                    i.fa.fa-flask.fa-stack-1x.text-primary
+                  img.img-circle.img-thumbnail.testimonial(src="/images/testimonials/beau.jpg")
                   h4
-                    strong Service Name
-                  p Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  a.btn.btn-light(href='#') Learn More
-              .col-md-3.col-sm-6
+                    strong
+                      | Beau, Niles
+                      br
+                      | Entrepreneur 
+                  p Artem, was a good addition to our team. He was productive quickly on our existing application. One of the better contractors I have used. He is also very pleasant to work with.
+              .col-md-3.col-sm-12
                 .service-item
+                  img.img-circle.img-thumbnail.testimonial(src="/images/testimonials/wayne.jpg")
                   span.fa-stack.fa-4x
                     i.fa.fa-circle.fa-stack-2x
                     i.fa.fa-shield.fa-stack-1x.text-primary
                   h4
-                    strong Service Name
-                  p Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  a.btn.btn-light(href='#') Learn More
-            // /.row (nested)
-          // /.col-lg-10
-        // /.row
-      // /.container
-    // Callout
+                    strong
+                      | Wayne, Charlotte
+                      br
+                      | Photographer
+                  p Artem is super talented!  Artem was hired a few months ago to create the back end code on Ruby for a very complicated app.  His responsiveness to any issue or problem that arose was amazing, he worked incredibly well with our three other programmers in three different countries, and his ability to design code to address the most complex application challenges was real genius.
     aside.callout
       .text-vertical-center
-        h1 Vertically Centered Text
-    // Portfolio
-    section#portfolio.portfolio
-      .container
-        .row
-          .col-lg-10.col-lg-offset-1.text-center
-            h2 Our Work
-            hr.small
-            .row
-              .col-md-6
-                .portfolio-item
-                  a(href='#')
-                    img.img-portfolio.img-responsive(src='img/portfolio-1.jpg')
-              .col-md-6
-                .portfolio-item
-                  a(href='#')
-                    img.img-portfolio.img-responsive(src='img/portfolio-2.jpg')
-              .col-md-6
-                .portfolio-item
-                  a(href='#')
-                    img.img-portfolio.img-responsive(src='img/portfolio-3.jpg')
-              .col-md-6
-                .portfolio-item
-                  a(href='#')
-                    img.img-portfolio.img-responsive(src='img/portfolio-4.jpg')
-            // /.row (nested)
-            a.btn.btn-dark(href='#') View More Items
-          // /.col-lg-10
-        // /.row
-      // /.container
-    // Call to Action
-    aside.call-to-action.bg-primary
-      .container
-        .row
-          .col-lg-12.text-center
-            h3 The buttons below are impossible to resist.
-            a.btn.btn-lg.btn-light(href='#') Click Me!
-            a.btn.btn-lg.btn-dark(href='#') Look at Me!
-    // Map
-    section#contact.map
-      iframe(width='100%', height='100%', frameborder='0', scrolling='no', marginheight='0', marginwidth='0', src='https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&aq=0&oq=twitter&sll=28.659344,-81.187888&sspn=0.128789,0.264187&ie=UTF8&hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&t=m&z=15&iwloc=A&output=embed')
-      br
-      small
-        a(href='https://maps.google.com/maps?f=q&source=embed&hl=en&geocode=&q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&aq=0&oq=twitter&sll=28.659344,-81.187888&sspn=0.128789,0.264187&ie=UTF8&hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&t=m&z=15&iwloc=A')
-    // Footer
-    footer
-      .container
-        .row
-          .col-lg-10.col-lg-offset-1.text-center
-            h4
-              strong Start Bootstrap
-            p
-              | 3481 Melrose Place
-              br
-              | Beverly Hills, CA 90210
-            ul.list-unstyled
-              li
-                i.fa.fa-phone.fa-fw
-                |  (123) 456-7890
-              li
-                i.fa.fa-envelope-o.fa-fw
-                a(href='mailto:name@example.com') name@example.com
-            br
-            ul.list-inline
-              li
-                a(href='#')
-                  i.fa.fa-facebook.fa-fw.fa-3x
-              li
-                a(href='#')
-                  i.fa.fa-twitter.fa-fw.fa-3x
-              li
-                a(href='#')
-                  i.fa.fa-dribbble.fa-fw.fa-3x
-            hr.small
-            p.text-muted Copyright © Your Website 2014
-    script( src='/js/vendor.js' )
+        h3.shaded I'm a fun guy to work with – send me a message and we will figure out how can I help your business.
+        br
+        a.btn.btn-lg.btn-light(href="mailto:hey@shlaj.in") Contact me
+    //- script( src='/js/vendor.js' )
     script( src='/js/index.js' )
-    // Custom Theme JavaScript
-    script.
-      // Closes the sidebar menu
-      $("#menu-close").click(function(e) {
-      e.preventDefault();
-      $("#sidebar-wrapper").toggleClass("active");
-      });
-      // Opens the sidebar menu
-      $("#menu-toggle").click(function(e) {
-      e.preventDefault();
-      $("#sidebar-wrapper").toggleClass("active");
-      });
-      // Scrolls to the selected menu item on the page
-      $(function() {
-      $('a[href*=#]:not([href=#])').click(function() {
-      if (location.pathname.replace(/^\\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-      var target = $(this.hash);
-      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-      if (target.length) {
-      $('html,body').animate({
-      scrollTop: target.offset().top
-      }, 1000);
-      return false;
-      }
-      }
-      });
-      });

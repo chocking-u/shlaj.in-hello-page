@@ -1,3 +1,0 @@
-'wop wop'
-wop = =>
-	'dop'
